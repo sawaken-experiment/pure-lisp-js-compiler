@@ -17,8 +17,12 @@ var appendBuiltinFuncs = function(compiledCode){
   return builtinFuncs + '\n' + compiledCode;
 }
 
-var compile = function(lispCode){
-  return appendBuiltinFuncs(compiler.compile(lispCode));
+while (true) {
+  var stdin = require("fs").readFileSync("/dev/stdin", "utf8");
+  var mainCode = compiler.compile(stdin);
+  if (!mainCode) {
+    console.log("Compile Error\n");
+  } else {
+    console.log(appendBuiltinFuncs(mainCode));
+  }
 }
-
-console.log(compile(lispcode));

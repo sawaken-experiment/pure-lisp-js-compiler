@@ -150,44 +150,6 @@ var compileExp = function(tree){
   }
 };
 
-
-function atom(a) { return typeof(a) !== "object"; }
-function eq(a, b) { return a === b; }
-function car(obj) { return obj.car; }
-function cdr(obj) { return obj.cdr; }
-function cons(a, b) { return {car:a, cdr:b}; }
-function add(a, b) { return a + b; }
-function sub(a, b) { return a - b; }
-function mul(a, b) { return a * b; }
-function div(a, b) { return a / b; }
-function display(ls) {
-  var toStr = function(ls, first, last, bottom) {
-    if (first && last) {
-      return "()";
-    } else if (last) {
-      return ")";
-    } else if (bottom) {
-      return ls.toString();
-    } else {
-      var a = car(ls);
-      var carStr = toStr(a, !atom(a), !atom(a) && atom(cdr(a)), atom(a));
-      var cdrStr = toStr(cdr(ls), false, atom(cdr(ls)));
-      return (first ? "(" : " ") + carStr + cdrStr;
-    }
-  }
-  if (atom(ls)) {
-    console.log(toStr(ls, false, false, true));
-  } else {
-    console.log(toStr(ls, true, atom(cdr(ls)), false));
-  }
-}
-
-function appendRuntimeCode(compiledCode){
-  var builtinFuncs = [atom, eq, car, cdr, cons, add, sub, mul, div, display];
-  var stringExpression = builtinFuncs.map(function(f){ return f.toString(); }).join('\n');
-  return stringExpression + '\n' + compiledCode;
-}
-
 module.exports = {
   compile: function(lispCode){
     var parsed = parser.process(lispCode);
@@ -195,7 +157,7 @@ module.exports = {
       return undefined;
     } else {
       var compiled = escodegen.generate({ type: 'Program', body: compileBody(parsed.parsed) });
-      return appendRuntimeCode(compiled);
+      return require("fs").readFileSync("./runtime_code.js", "ascii") + compiled;
     }
   }
 }

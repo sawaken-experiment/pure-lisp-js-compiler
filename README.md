@@ -6,19 +6,19 @@ compiler :: Lisp -> JavaScript
 Execute this compiler by Node.js.
 
 ```sh
-git clone https://github.com/sawaken/pure-lisp-js-compiler.git
-cd pure-lisp-js-compiler
-npm install escodegen   # install dependent library.
-node app.js [src_file]  # compiled code will be dumped as out.js.
-node out.js
+$ git clone https://github.com/sawaken/pure-lisp-js-compiler.git
+$ cd pure-lisp-js-compiler
+$ npm install escodegen   # install dependent library.
+$ node app.js [src_file]  # compiled code will be dumped as out.js.
+$ node out.js
 ```
 
 #  Lisp language
 
 builtin special-forms
 
-```lisp
-(quote List-literal)
+```
+(quote list-literal)
 ;; ex. (quote (1 2 3)) -> (1 2 3)
  
 (lambda (args+) exps+)
@@ -33,7 +33,7 @@ builtin special-forms
 
 builtin functions
 
-```lisp
+```
 (atom Object)
 ;; ex. (display 1) -> '#t'
 ;; ex. (display (quote (1 2 3))) -> '#f'

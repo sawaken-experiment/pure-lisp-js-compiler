@@ -13,9 +13,9 @@ var isDigit = isBetween('0', '9');
 var isLower = isBetween('a', 'z');
 var isUpper = isBetween('A', 'Z');
 var isAlpha = function(c){ return isLower(c) || isUpper(c); };
-var isAlphaNum = function(c){ return isAlpha(c) || isDigit(c); };
+var isAlphaNum = function(c){ return isAlpha(c) || isDigit(c) || c === '.'; };
 var isChar = function(x){ return function(c){ return c === x; }; };
-var isSpace = function(c){ return c === ' ' || c === '\n'; };
+var isSpace = function(c){ return c === ' ' || c === '\n' || c === '\t'; };
 
 
 var parse = function(parser, inp){ return parser(inp); };

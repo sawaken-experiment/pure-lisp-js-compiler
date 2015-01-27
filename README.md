@@ -3,7 +3,7 @@ compiler :: Lisp -> JavaScript
 
 # Usage
 
-Execute this compiler by Node.js.
+Execute compiler by Node.js.
 
 ```sh
 $ git clone https://github.com/sawaken/pure-lisp-js-compiler.git

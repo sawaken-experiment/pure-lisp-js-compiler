@@ -93,7 +93,7 @@ var form = function(command, p, r){
 };
 var list = function(content){
   return then(symbol(toInp("(")), function(){
-    return then(many1(content), function(xs){
+    return then(many(content), function(xs){
       return then(symbol(toInp(")")), function(){
 	return ret(xs);
       });

@@ -10,4 +10,3 @@ if (!compiledCode) {
 } else {
   fs.writeFile("out.js", compiledCode);
 }
-
